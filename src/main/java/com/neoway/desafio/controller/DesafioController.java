@@ -2,23 +2,21 @@ package com.neoway.desafio.controller;
 
 import com.neoway.desafio.service.DesafioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 
 @RestController
-@RequestMapping("desafio/importador")
+@RequestMapping("api/desafio")
 public class DesafioController {
 
     @Autowired
     DesafioService desafioService;
 
-    @PostMapping(value = "/execute")
+    @PostMapping(value = "/importa")
     public String execute() {
 
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -62,12 +60,12 @@ public class DesafioController {
 
     }
 
-    @DeleteMapping(value = "/removeAll")
+    @DeleteMapping(value = "/limpa")
     public String remove() {
 
         desafioService.removeTodosDados();
 
-        return "ok";
+        return "Base Limpa";
 
     }
 

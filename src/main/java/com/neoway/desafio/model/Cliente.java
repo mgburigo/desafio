@@ -105,6 +105,9 @@ public class Cliente implements Serializable {
     }
 
     public Boolean getCnpjValido() {
+        if (cnpjValido == null) {
+            cnpjValido = Boolean.FALSE;
+        }
         return cnpjValido;
     }
 

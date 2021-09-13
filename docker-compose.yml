@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+    api:
+        container_name: desafio-api
+        image: desafio-api
+        build: ./
+        ports:
+            - "8181:8181"
+        depends_on:
+            -   postgresqldb
+    postgresqldb:
+        image: postgres
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=desafio
+        restart: unless-stopped
+    pgadmin:
+        container_name: pgadmin_container
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-desafio@desafio.com}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+            PGADMIN_CONFIG_SERVER_MODE: 'False'
+        ports:
+            - "${PGADMIN_PORT:-5050}:80"
+        restart: unless-stopped

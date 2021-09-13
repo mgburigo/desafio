@@ -109,25 +109,32 @@ public class DesafioService {
                 }
 
                 client.setLojaMaisFrequente(removerAcentos(client.getLojaMaisFrequente().trim().toUpperCase()));
+
+                Boolean cnpjValidoLojaFrequente = Boolean.FALSE;
                 if ("NULL".equals(client.getLojaMaisFrequente()) || Strings.isEmpty(client.getLojaMaisFrequente())) {
                     client.setLojaMaisFrequente("");
                 } else {
                     if (client.getLojaMaisFrequente().matches("(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$)")) {
-                        client.setCnpjValido(Boolean.TRUE);
+                        cnpjValidoLojaFrequente = Boolean.TRUE;
                     } else {
                         client.setCnpjValido(Boolean.FALSE);
                     }
                 }
 
                 client.setLojaUltimaCompra(removerAcentos(client.getLojaUltimaCompra().trim().toUpperCase()));
+                Boolean cnpjValidoUltimaCompra = Boolean.FALSE;
                 if ("NULL".equals(client.getLojaUltimaCompra()) || Strings.isEmpty(client.getLojaUltimaCompra())) {
                     client.setLojaUltimaCompra("");
                 } else {
                     if (client.getLojaUltimaCompra().matches("(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$)")) {
-                        client.setCnpjValido(Boolean.TRUE);
+                        cnpjValidoUltimaCompra = Boolean.TRUE;
                     } else {
                         client.setCnpjValido(Boolean.FALSE);
                     }
+                }
+
+                if (cnpjValidoLojaFrequente && cnpjValidoUltimaCompra) {
+                    client.setCnpjValido(Boolean.FALSE);
                 }
 
                 desafioRepository.save(client);
