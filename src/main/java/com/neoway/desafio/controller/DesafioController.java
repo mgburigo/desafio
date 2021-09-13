@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 
 @RestController
-@RequestMapping("api/desafio")
+@RequestMapping("desafio/api/v1/")
 public class DesafioController {
 
     @Autowired
