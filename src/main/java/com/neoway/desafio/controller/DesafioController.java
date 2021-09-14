@@ -20,7 +20,7 @@ public class DesafioController {
     public String execute() {
 
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = loader.getResourceAsStream("file/base_teste2.txt");
+        InputStream inputStream = loader.getResourceAsStream("file/base_teste.txt");
 
         InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         BufferedReader reader = new BufferedReader(streamReader);

@@ -64,31 +64,31 @@ Desejável
 3. Após containers executando, os endpoints para execução:
 
 method: POST
-http://localhost:8181/api/desafio/importa
+http://localhost:8181/desafio/api/v1/importa
 
 method: POST
-http://localhost:8181/api/desafio/higieniza
+http://localhost:8181/desafio/api/v1/higieniza
 
 method: DELETE
-http://localhost:8181/api/desafio/limpa
+http://localhost:8181/desafio/api/v1/limpa
 
 <!-- VALIDAÇÕES REALIZADAS -->
 ## Validações realizadas
 
-###/importa
+### /importa
 _Com o arquivo já incorporado ao projeto, o endpoint fará a persistência de TODOS os dados no banco Postgres na tabela TB_CLIENTE que será criada
 ao inicializar a API;_
 
-###/higieniza
+### /higieniza
 _Em todos os registros adicionados ao banco, será feita a higienização conforme solicitado, LETRAS MAÍUSCULAS, sem acentos, será validado somente CPF com o padrão
 000.000.000-00 e CNPJs com o padrão 00.000.000/0000-00, irá remover espaços no inicio e fim do dado e irá salvar uma coluna com a informa de CPF válido
 e CNPJ válido
 
-###/limpa
+### /limpa
 _Remove todos os dados da tabela TB_CLIENTE_
 
 
-###Consultas
+### Consultas
 
 * http://localhost:5050
 

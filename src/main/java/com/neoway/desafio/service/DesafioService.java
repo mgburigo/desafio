@@ -71,6 +71,7 @@ public class DesafioService {
 
         int pages = 0;
         int limit = 1000;
+        int countLinha = 0;
 
         boolean hasPending = true;
 
@@ -83,9 +84,15 @@ public class DesafioService {
             hasPending = clientesList.getTotalPages() > pages;
 
             for (Cliente client : clientesList) {
-                System.out.println(client.getCpf().trim().toUpperCase());
+
+                countLinha++;
+
                 client.setCpf(client.getCpf().trim().toUpperCase());
                 if (client.getCpf().matches("(^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)")) {
+                    client.setCpfValido(Boolean.TRUE);
+                } else if (client.getCpf().length() == 11){
+                    String cpfCompleto = getCpfCompleto(client);
+                    client.setCpf(cpfCompleto);
                     client.setCpfValido(Boolean.TRUE);
                 } else {
                     client.setCpfValido(Boolean.FALSE);
@@ -138,11 +145,17 @@ public class DesafioService {
                 }
 
                 desafioRepository.save(client);
+
+                System.out.println("Higienização linha "+countLinha);
             }
 
             pages += 1;
         }
 
+    }
+
+    private String getCpfCompleto(Cliente client) {
+        return client.getCpf().substring(0, 3) + "." + client.getCpf().substring(3,6) + "." + client.getCpf().substring(6, 9) + "-" + client.getCpf().substring(9, 10);
     }
 
     public void removeTodosDados() {
